@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Lesson 15</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <style>
+        .demo1 {
+            padding: auto;
+            background-color: cadetblue;
+        }
+        .box1 {
+            padding: 5px;
+            background-color: aqua;
+        }
+        .box2 {
+            padding: auto;
+            background-color: orange;
+        }
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 数据代理 -->
+    <div id="root">
+        <h2>welcome to {{name}}</h2>
+        <!-- 阻止默认事件 -->
+        <a href="https://www.nature.com" @click.prevent="showInfo">click me</a>
+        <!-- 阻止事件冒泡 -->
+        <div class="demo1" @click="showInfo">
+            <button @click.stop="showInfo">click1</button>
+        </div>
+        <!-- 只触发一次 -->
+        <button @click.once="showInfo">click2</button>
+        <!-- 使用事件的捕获模式 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            div1
+            <div class="box2" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+        <!-- self -->
+        <div class="demo1" @click.self="showInfo3">
+            <button @click="showInfo3">click1</button>
+        </div>
+        <!-- passive 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+        <!-- <ul @scroll="demo" class="list"> -->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <script>
+        // vm._data === data
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'jack',
+            },
+            methods: {
+                showInfo(e) {
+                    console.log(event.target.innerText)
+                    // e.preventDefault()
+                    alert("warning")
+                },
+                showMsg(msg) {
+                    alert(msg);
+                },
+                showInfo3(e){
+                    console.log(e.target)
+                },
+                demo(){
+                    console.log("@")
+                }
+            }
+        })
+
+    </script>
+</body>

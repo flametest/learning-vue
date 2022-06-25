@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Lesson 13</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 数据代理 -->
+    <div id="root">
+        <h2>name: {{name}}</h2>
+        <h2>address: {{address}}</h2>
+    </div>
+    <script>
+        // vm._data === data
+        Vue.config.productionTip = false
+        let data = {
+            name: 'jack',
+            address: 'beijing',
+        }
+        const vm = new Vue({
+            el: '#root',
+            data: data,
+        })
+    </script>
+</body>

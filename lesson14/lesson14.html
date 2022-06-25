@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Lesson 14</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 数据代理 -->
+    <div id="root">
+        <h2>welcome to {{name}}</h2>
+        <button v-on:click="showInfo">click me</button>
+        <button @click="showInfo1($event, 66)">click me1</button>
+    </div>
+    <script>
+        // vm._data === data
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'jack',
+            },
+            methods: {
+                showInfo(event) {
+                    console.log(event.target.innerText)
+                    alert("warning")
+                },
+                showInfo1(event, a) {
+                    console.log(event)
+                    alert(a)
+                }
+            }
+        })
+
+    </script>
+</body>
